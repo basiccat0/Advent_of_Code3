@@ -35,14 +35,15 @@ public class Day03Template {
         }
         largestCombo += String.valueOf(largestNumber);
 
-        String nextLargest = "";
+        int nextLargestNumber = Integer.parseInt(batteries.substring(position, position + 1));
         while (position < length) {
-            int nextNumber = Integer.parseInt(batteries.substring(position, position + 1));
-            count ++;
-            if (largestNumber < nextNumber) {
-                largestNumber = nextNumber;
+            int nextNumber = Integer.parseInt(batteries.substring (position, position + 1));
+            position ++;
+            if (nextLargestNumber < nextNumber) {
+                nextLargestNumber = nextNumber;
             }
         }
+        largestCombo += String.valueOf(nextLargestNumber);
 
         return Integer.parseInt(largestCombo);
     }
