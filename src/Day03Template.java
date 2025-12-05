@@ -21,25 +21,29 @@ public class Day03Template {
     // COMPLETE THIS METHOD!
     public static int getLargestCombination(String batteries) {
         String largestCombo = "";
-        int position = 0;
-        int count = 0;
-        int largestNumber = Integer.parseInt(batteries.substring(0, 1));
+        int largestNumber = 0;
         int length = batteries.length();
-        while (count < length) {
+        for (int count = 0; count < length; count++) {
             int nextNumber = Integer.parseInt(batteries.substring(count, count + 1));
-            count ++;
             if (largestNumber < nextNumber) {
                 largestNumber = nextNumber;
-                position = count;
             }
         }
         largestCombo += String.valueOf(largestNumber);
 
-        int nextLargestNumber = Integer.parseInt(batteries.substring(position, position + 1));
-        while (position < length) {
-            int nextNumber = Integer.parseInt(batteries.substring (position, position + 1));
-            position ++;
-            if (nextLargestNumber < nextNumber) {
+        int nextLargestNumber = 0;
+        boolean check = false;
+
+        for (int count = 0; count < length; count++) {
+            int nextNumber = Integer.parseInt(batteries.substring (count, count + 1));
+            if (largestNumber == nextNumber) {
+                if (!check) {
+                    check = true;
+                } else {
+                    nextLargestNumber = nextNumber;
+                }
+            }
+            if (nextNumber != largestNumber && nextNumber > nextLargestNumber) {
                 nextLargestNumber = nextNumber;
             }
         }
