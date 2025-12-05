@@ -20,38 +20,33 @@ public class Day03Template {
 
     // COMPLETE THIS METHOD!
     public static int getLargestCombination(String batteries) {
-        String largestCombo = "";
-        int largestNumber = 0;
+
         int length = batteries.length();
-        for (int count = 0; count < length; count++) {
-            int nextNumber = Integer.parseInt(batteries.substring(count, count + 1));
-            if (largestNumber < nextNumber) {
-                largestNumber = nextNumber;
-            }
-        }
-        largestCombo += String.valueOf(largestNumber);
+        int largestNumber = 0;
 
-        int nextLargestNumber = 0;
-        boolean check = false;
+        for (int i = 0; i < length - 1; i++) {
+            int leftDigit = Integer.parseInt(batteries.substring(i, i + 1));
 
-        for (int count = 0; count < length; count++) {
-            int nextNumber = Integer.parseInt(batteries.substring (count, count + 1));
-            if (largestNumber == nextNumber) {
-                if (!check) {
-                    check = true;
-                } else {
-                    nextLargestNumber = nextNumber;
+            int maxRightDigit = -1;
+
+            // find largest digit to the right
+            for (int j = i + 1; j < length; j++) {
+                int rightDigit = Integer.parseInt(batteries.substring(j, j + 1));
+                if (rightDigit > maxRightDigit) {
+                    maxRightDigit = rightDigit;
                 }
             }
-            if (nextNumber != largestNumber && nextNumber > nextLargestNumber) {
-                nextLargestNumber = nextNumber;
+
+            // form number leftDigit + maxRightDigit
+            int combo = leftDigit * 10 + maxRightDigit;
+
+            if (combo > largestNumber) {
+                largestNumber = combo;
             }
         }
-        largestCombo += String.valueOf(nextLargestNumber);
 
-        return Integer.parseInt(largestCombo);
+        return largestNumber;
     }
-
 
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
