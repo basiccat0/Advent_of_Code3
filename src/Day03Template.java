@@ -22,30 +22,28 @@ public class Day03Template {
     public static int getLargestCombination(String batteries) {
 
         int length = batteries.length();
-        int largestNumber = 0;
+        int largestCombo = 0;
 
-        for (int i = 0; i < length - 1; i++) {
-            int leftDigit = Integer.parseInt(batteries.substring(i, i + 1));
+        for (int count = 0; count < length - 1; count++) {
+            int largestNumber = Integer.parseInt(batteries.substring(count, count + 1));
 
-            int maxRightDigit = -1;
+            int nextLargestNumber = -1;
 
-            // find largest digit to the right
-            for (int j = i + 1; j < length; j++) {
-                int rightDigit = Integer.parseInt(batteries.substring(j, j + 1));
-                if (rightDigit > maxRightDigit) {
-                    maxRightDigit = rightDigit;
+            for (int i = count + 1; i < length; i++) {
+                int nextNumber = Integer.parseInt(batteries.substring(i, i + 1));
+                if (nextNumber > nextLargestNumber) {
+                    nextLargestNumber = nextNumber;
                 }
             }
 
-            // form number leftDigit + maxRightDigit
-            int combo = leftDigit * 10 + maxRightDigit;
+            int combo = largestNumber * 10 + nextLargestNumber;
 
-            if (combo > largestNumber) {
-                largestNumber = combo;
+            if (combo > largestCombo) {
+                largestCombo = combo;
             }
         }
 
-        return largestNumber;
+        return largestCombo;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
